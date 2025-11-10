@@ -40,6 +40,7 @@ AI-Powered Personalized Training Plan Generation Using Data Mining and Deep Lear
 - **Scaling**: StandardScaler applied (mean=0, std=1)
 - **Output**: `scaled_clustering_data.csv` (115 athletes, 6 features)
 
+---
 
 ### Key Insights
 
@@ -59,6 +60,7 @@ AI-Powered Personalized Training Plan Generation Using Data Mining and Deep Lear
 - **Moderate positive correlation** (0.71): `avg_weekly_mileage` ↔ `avg_training_days`
   - Higher volume runners train more frequently
 
+---
 
 ### Visualizations
 
@@ -72,6 +74,7 @@ AI-Powered Personalized Training Plan Generation Using Data Mining and Deep Lear
    - Identifies redundant features
    - Guides clustering interpretation
 
+---
 
 ### Technical Decisions
 
@@ -83,6 +86,7 @@ AI-Powered Personalized Training Plan Generation Using Data Mining and Deep Lear
 | **Recreational filter (3-70 mi/week)** | Focus on target user segment; exclude ultra-runners and beginners |
 | **Recovery ratio = 0.1 for 7-day training** | Avoid division by zero; correctly shows extreme fatigue |
 
+---
 
 ### Project Structure
 
@@ -103,6 +107,8 @@ running-plan-builder/
 └── README.md
 ```
 
+---
+
 ### Sprint 1 Success Metrics
 
 ✅ **Data Quality**: 14,234 clean weekly records across 115 athletes  
@@ -111,6 +117,7 @@ running-plan-builder/
 ✅ **Visualizations**: Professional plots generated  
 ✅ **Documentation**: Clear notebook structure with comments 
 
+---
 
 ## About This Project
 
