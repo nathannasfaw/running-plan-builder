@@ -1,0 +1,44 @@
+{
+    "0": {
+        "name": "The Consistent Cruiser/Core",
+        "description": "This athlete maintains a solid training routine with moderate mileage and consistent training days.\nThey balance their training well, showing good consistency and recovery, making them reliable performers.\nThis profile suggests a dedicated runner who values steady progress and injury prevention.\n",
+        "recommendation": "1. Introduce one 'quality' day per week (e.g. tempo run or intervals) to improve pace.\n2. To build endurance, gradually increase long run distance by 10 percent every 1-2 weeks.\n3. Use cross-training (cycling, swimming) on rest days to enhance aerobic fitness without extra running stress.\n",
+        "num_athletes": 60,
+        "characteristics": {
+            "mileage": 18.89138044170612,
+            "pace": 9.936476451558129,
+            "training_days": 2.6958573934125876,
+            "fatigue": 24.147441972179124,
+            "consistency": 7.3021502633805,
+            "recovery": 2.3966782452370023
+        }
+    },
+    "1": {
+        "name": "The Foundation Builder/Base",
+        "description": "This athlete is likely in the early stages of their running journey or focusing on building a solid foundation.\nThey have lower mileage and fewer training days (maybe due to a busy schedule), which is appropriate for their current fitness level.\nThis profile indicates a focus on gradual improvement and injury prevention.\n",
+        "recommendation": "1. Focus on making running a consistent habit. Aim for 3 days/week, even if mileage is low.\n2. Gradually increase weekly mileage by no more than 10 percent per week to build endurance safely.\n3. Prioritize injury prevention with proper warm-up, cool-downs, and good running form.\n4. Incorporate strength training and flexibility exercises to support running form and prevent injuries.\n",
+        "num_athletes": 41,
+        "characteristics": {
+            "mileage": 10.329948906878595,
+            "pace": 9.979693608939693,
+            "training_days": 1.8757822499708274,
+            "fatigue": 6.891275726826533,
+            "consistency": 4.422342009205179,
+            "recovery": 3.746073270252749
+        }
+    },
+    "2": {
+        "name": "The Competative Peak/Prime",
+        "description": "This athlete trains at a high level, has frequent training days, and is an experienced runner.\nThey are likely preparing for competitive events and have a strong commitment to their training regimen.\nThis all comes with a very high fatigue index, indicating they are pushing their limits regularly. for competitive performance.\n",
+        "recommendation": "1. Focus on race-specific training: Incorporate interval training, tempo runs, and long runs tailored to race goals.\n2. Prioritize active recovery: Focus on sleep, nutrition, foam rolling, and stretching.\n3. Implement structured periodization to manage fatigue and peak for key races.\n4. Monitor for signs of overtraining, given the high fatigue and low recovery scores.\n",
+        "num_athletes": 14,
+        "characteristics": {
+            "mileage": 32.070996686468064,
+            "pace": 8.819624974619261,
+            "training_days": 4.492204753731039,
+            "fatigue": 141.73008419899614,
+            "consistency": 9.565250099267773,
+            "recovery": 1.0024727191651988
+        }
+    }
+}

@@ -1,0 +1,107 @@
+
+================================================================================
+K-MEANS CLUSTERING ANALYSIS SUMMARY (K=3)
+================================================================================
+
+MODEL PERFORMANCE:
+  • Algorithm: K-Means Clustering
+  • Number of Clusters: 3
+  • Silhouette Score: 0.341
+  • Davies-Bouldin Index: 0.980
+  • Total Athletes Analyzed: 115
+
+================================================================================
+CLUSTER BREAKDOWN:
+================================================================================
+
+CLUSTER 0: The Consistent Cruiser/Core
+────────────────────────────────────────────────────────────────────────────────
+Population: 60 athletes (52.2%)
+
+Profile:
+  • Weekly Mileage:     18.9 miles
+  • Pace:               9.94 min/mile
+  • Training Days:      2.7 days/week
+  • Fatigue Index:      24.1
+  • Consistency:        7.3
+  • Recovery Ratio:     2.40
+
+Description:
+  This athlete maintains a solid training routine with moderate mileage and consistent training days.
+They balance their training well, showing good consistency and recovery, making them reliable performers.
+This profile suggests a dedicated runner who values steady progress and injury prevention.
+
+Training Recommendations:
+  1. Introduce one 'quality' day per week (e.g. tempo run or intervals) to improve pace.
+2. To build endurance, gradually increase long run distance by 10 percent every 1-2 weeks.
+3. Use cross-training (cycling, swimming) on rest days to enhance aerobic fitness without extra running stress.
+
+
+CLUSTER 1: The Foundation Builder/Base
+────────────────────────────────────────────────────────────────────────────────
+Population: 41 athletes (35.7%)
+
+Profile:
+  • Weekly Mileage:     10.3 miles
+  • Pace:               9.98 min/mile
+  • Training Days:      1.9 days/week
+  • Fatigue Index:      6.9
+  • Consistency:        4.4
+  • Recovery Ratio:     3.75
+
+Description:
+  This athlete is likely in the early stages of their running journey or focusing on building a solid foundation.
+They have lower mileage and fewer training days (maybe due to a busy schedule), which is appropriate for their current fitness level.
+This profile indicates a focus on gradual improvement and injury prevention.
+
+Training Recommendations:
+  1. Focus on making running a consistent habit. Aim for 3 days/week, even if mileage is low.
+2. Gradually increase weekly mileage by no more than 10 percent per week to build endurance safely.
+3. Prioritize injury prevention with proper warm-up, cool-downs, and good running form.
+4. Incorporate strength training and flexibility exercises to support running form and prevent injuries.
+
+
+CLUSTER 2: The Competative Peak/Prime
+────────────────────────────────────────────────────────────────────────────────
+Population: 14 athletes (12.2%)
+
+Profile:
+  • Weekly Mileage:     32.1 miles
+  • Pace:               8.82 min/mile
+  • Training Days:      4.5 days/week
+  • Fatigue Index:      141.7
+  • Consistency:        9.6
+  • Recovery Ratio:     1.00
+
+Description:
+  This athlete trains at a high level, has frequent training days, and is an experienced runner.
+They are likely preparing for competitive events and have a strong commitment to their training regimen.
+This all comes with a very high fatigue index, indicating they are pushing their limits regularly. for competitive performance.
+
+Training Recommendations:
+  1. Focus on race-specific training: Incorporate interval training, tempo runs, and long runs tailored to race goals.
+2. Prioritize active recovery: Focus on sleep, nutrition, foam rolling, and stretching.
+3. Implement structured periodization to manage fatigue and peak for key races.
+4. Monitor for signs of overtraining, given the high fatigue and low recovery scores.
+
+
+================================================================================
+KEY INSIGHTS:
+================================================================================
+  ✓ Three distinct athlete profiles successfully identified
+  ✓ Clear progression: Foundation Builder → Consistent Cruiser → Competitive Peak
+  ✓ Each cluster has unique training needs and recovery requirements
+  ✓ 52.2% are intermediate runners (largest group)
+  ✓ 12.2% are elite/competitive runners (need careful fatigue management)
+  ✓ 35.7% are building base fitness (focus on consistency)
+
+================================================================================
+PRACTICAL APPLICATIONS:
+================================================================================
+  1. Personalized Training Plans: Assign different workout types per cluster
+  2. Injury Prevention: Cluster 2 needs enhanced recovery protocols
+  3. Progress Tracking: Monitor athletes moving between clusters
+  4. New Athlete Onboarding: Predict cluster membership for recommendations
+  5. Resource Allocation: Focus coaching attention where most needed
+
+================================================================================
