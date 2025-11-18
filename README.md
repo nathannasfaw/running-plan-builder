@@ -124,3 +124,181 @@ running-plan-builder/
 This project uses real Strava running data to build personalized training plans through machine learning clustering. By grouping runners with similar characteristics, the system can generate adaptive, data-driven recommendations.
 
 **Tech Stack**: Python, Pandas, Scikit-learn, Matplotlib, Seaborn
+
+
+
+
+## Sprint 2 Review
+
+### Deliverables 
+
+#### 1. K-Means Clustering
+- **Optimal Clusters**: 3 clusters identified using elbow method and silhouette analysis
+- **Model Performance**:
+  - Silhouette Score: 0.341 (reasonable cluster separation)
+  - Inertia: 115.8
+- **Athlete Distribution**:
+  - Cluster 0: 38 athletes (33%)
+  - Cluster 1: 39 athletes (34%)
+  - Cluster 2: 38 athletes (33%)
+- **Output**: `athlete_profiles_clustered_k3.csv`, `cluster_summary_k3.csv`
+
+#### 2. Cluster Profiling & Archetypes
+**Cluster 0: High-Volume Consistent Runners**
+- Weekly mileage: 28.5 mi (highest)
+- Training days: 3.2 days/week
+- Pace: 5.8 min/km (fastest)
+- Fatigue index: 37.8 (highest)
+- Profile: Experienced runners maintaining high consistent volume
+
+**Cluster 1: Low-Volume Casual Runners**
+- Weekly mileage: 12.8 mi (lowest)
+- Training days: 2.4 days/week
+- Pace: 6.5 min/km (slowest)
+- Fatigue index: 15.2 (lowest)
+- Profile: Beginners or recreational runners with lower commitment
+
+**Cluster 2: Moderate Balanced Runners**
+- Weekly mileage: 19.6 mi (middle)
+- Training days: 2.9 days/week
+- Pace: 6.0 min/km (moderate)
+- Fatigue index: 25.4 (moderate)
+- Profile: Intermediate runners balancing volume and recovery
+
+#### 3. DBSCAN Clustering Analysis
+- **Implementation**: Density-based clustering with tuned eps=1.65 and min_samples
+- **Results**: Identified 1 main cluster + 4 outliers
+- **Limitation**: Not suitable for personalized recommendations (most athletes grouped together)
+- **Comparison**: K-Means provided clearer archetypes for training plan generation
+
+#### 4. LSTM Model Development
+- **Architecture**: Sequential model with LSTM layers for time-series forecasting
+- **Input**: 6-week sequences of weekly mileage
+- **Output**: Next week's mileage prediction
+- **Training Data**: Transformed weekly records into sequential format
+- **Model Saved**: `models/lstm_model_best.keras`
+
+---
+
+### Key Insights
+
+#### Cluster Comparison Analysis
+| Metric | Cluster 0 (High) | Cluster 1 (Low) | Cluster 2 (Moderate) |
+|--------|------------------|-----------------|----------------------|
+| Avg Weekly Mileage | 28.5 mi | 12.8 mi | 19.6 mi |
+| Avg Training Days | 3.2 days | 2.4 days | 2.9 days |
+| Avg Pace | 5.8 min/km | 6.5 min/km | 6.0 min/km |
+| Avg Fatigue Index | 37.8 | 15.2 | 25.4 |
+| Avg Consistency | 5.2 | 3.8 | 4.5 |
+
+#### Model Selection Decision
+- **Chosen Model**: K-Means with k=3
+- **Rationale**: 
+  - Clear, interpretable athlete archetypes
+  - Balanced cluster sizes for training plan diversity
+  - Better silhouette score (0.341) and meaningful separation
+  - DBSCAN found only 1 cluster + 4 outliers (not useful for personalization)
+
+#### LSTM Model Performance
+| Metric | Value | Interpretation |
+|--------|-------|----------------|
+| **Test Loss (MSE)** | 0.0187 | Low error on scaled data |
+| **MAE (Scaled)** | 0.1055 | Small average prediction error |
+| **MAE** | 7.04 miles | Average prediction error in real units |
+| **RMSE** | 9.12 miles | Typical prediction deviation |
+| **R² Score** | 0.414 | Model explains 41.4% of variance |
+
+**Model Interpretation:**
+- **Reasonable accuracy** for 1-week-ahead mileage forecasting
+- **R² of 0.414** indicates moderate predictive power (expected for human behavior)
+- **MAE of 7 miles** is acceptable given weekly ranges of 3-70 miles
+- **Use case**: Good enough for directional guidance ("increase", "maintain", "taper")
+- **Limitation**: Not precise enough for exact mileage prescription (hence the rule-based system)
+
+**Sample Predictions:**
+```
+Actual → Predicted (Error)
+24.7 mi → 19.5 mi (5.2 mi)   ✓ Close
+ 7.4 mi →  8.9 mi (1.5 mi)   ✓ Very close
+ 4.3 mi → 15.5 mi (11.2 mi)  ✗ Overestimated low week
+55.1 mi → 33.9 mi (21.2 mi)  ✗ Underestimated high week
+37.5 mi → 43.6 mi (6.1 mi)   ✓ Close
+```
+
+---
+
+### Visualizations
+
+1. **Clustering Comparison** (`visualizations/clustering_comparison_kmeans_vs_dbscan.png`)
+   - Side-by-side K-Means vs DBSCAN using PCA components
+   - K-Means: 3 balanced clusters (Silhouette: 0.341)
+   - DBSCAN: 1 main cluster + 4 outliers (not useful for personalization)
+   - Visual justification for K-Means selection
+
+2. **Cluster Comparison Report** (`reports/clustering_comparison.txt`)
+   - Quantitative metrics and statistical analysis
+   
+3. **Cluster Profiles** (`data/cluster_profiles.json`)
+   - JSON structure with detailed archetype definitions
+   - Used for rule-based recommendation system
+
+---
+
+### Technical Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| **k=3 clusters** | Optimal balance between specificity and generalization; clear elbow in inertia plot |
+| **K-Means over DBSCAN** | More interpretable archetypes; DBSCAN grouped 96% of athletes into one cluster |
+| **PCA for visualization** | Reduced 6D feature space to 2D while preserving cluster structure |
+| **6-week LSTM sequences** | Captures training cycle patterns while maintaining sufficient training samples |
+| **Keras Sequential model** | Simple architecture suitable for univariate time-series forecasting |
+| **MSE loss function** | Standard for regression tasks; aligns with RMSE evaluation metric |
+
+---
+
+### Project Structure Update
+
+```
+running-plan-builder/
+├── data/
+│   ├── athlete_profiles_clustered_k3.csv  # Athletes with cluster labels
+│   ├── cluster_summary_k3.csv             # Cluster statistics
+│   └── cluster_profiles.json              # Archetype definitions
+├── models/
+│   └── lstm_model_best.keras              # Trained LSTM model
+├── notebooks/
+│   ├── clustering.ipynb                   # Clustering implementation
+│   └── lstm_model.ipynb                   # LSTM training pipeline
+├── reports/
+│   ├── clustering_comparison.txt          # Model comparison analysis
+│   └── clustering_summary_k3.txt          # Final cluster report
+├── visualizations/
+│   └── clustering_comparison_kmeans_vs_dbscan.png
+└── README.md
+```
+
+---
+
+### Sprint 2 Success Metrics
+
+✅ **Clustering**: 3 clear athlete archetypes identified  
+✅ **Model Comparison**: K-Means vs DBSCAN analysis completed with visualization  
+✅ **LSTM Architecture**: Sequential model trained with R²=0.414  
+✅ **Forecasting Accuracy**: MAE of 7.04 miles on test set  
+✅ **Data Pipeline**: Weekly sequences prepared for forecasting  
+✅ **Documentation**: Cluster profiles exported to JSON  
+✅ **Model Persistence**: Trained models saved for deployment  
+✅ **Visualization**: PCA-based cluster comparison plot created  
+
+---
+
+### Next Steps (Sprint 3)
+
+- Integrate clustering and LSTM models into recommendation pipeline
+- Build rule-based expert system using cluster profiles
+- Connect OpenAI API for natural language generation
+- Develop Streamlit web interface
+- Complete end-to-end testing and final report
+
+**Tech Stack**: Python, Pandas, Scikit-learn, TensorFlow/Keras, Matplotlib, Seaborn
