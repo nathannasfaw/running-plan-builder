@@ -302,3 +302,92 @@ running-plan-builder/
 - Complete end-to-end testing and final report
 
 **Tech Stack**: Python, Pandas, Scikit-learn, TensorFlow/Keras, Matplotlib, Seaborn
+
+## Sprint 3 Review
+
+### Deliverables
+
+#### 1. **Personalized Plan Generation Web App**
+- **Streamlit UI**: Modern, earth-tone themed interface with Quick and Advanced modes.
+    - **Quick Plan**: Minimal input for new runners.
+    - **Advanced Plan**: Collects 6 weeks of mileage, fatigue, training days, and race goals for personalized recommendations.
+- **User Experience**: 
+    - Sidebar collects all relevant inputs.
+    - Main area displays a structured summary, a single weekly schedule table, and coach’s advice.
+    - Table includes day-by-day activities, mileage, time, and pace for each workout.
+
+#### 2. **LSTM Integration for Mileage Prediction**
+- **Advanced Mode**: Uses a trained LSTM model to predict next week’s mileage based on the user’s last 6 weeks.
+- **Fallback**: If LSTM is unavailable, uses a rule-based estimate (average of last 3 weeks + 5%).
+
+#### 3. **LLM-Driven Plan Explanation**
+- **Gemini (Google AI Studio) API**: Generates friendly, motivating, and structured training plans.
+- **Prompt Engineering**: Ensures the LLM outputs:
+    - A summary of workout types for the week.
+    - A single Markdown table with columns: Day, Activity, Mileage (mi), Time (min), Pace.
+    - Coach’s advice and encouragement (no repeated schedule in prose).
+- **Robust Table Extraction**: App parses and displays only the LLM’s Markdown table, ensuring clarity.
+
+#### 4. **Rule-Based Recommender System**
+- **Cluster Archetypes**: Uses K-Means cluster profiles to tailor recommendations.
+- **Action Mapping**: Internal codes (e.g., `progressive_build`) mapped to human-friendly phrases for LLM and UI.
+
+#### 5. **Code & UI Improvements**
+- **Error Handling**: Improved feedback for model/API errors.
+- **Styling**: Enhanced layout, font, and color palette for a professional look.
+- **Table Parsing**: Handles LLM output robustly, displaying only the intended weekly schedule.
+
+---
+
+### Key Insights
+
+- **LSTM Model**: Useful for directional mileage guidance, but not precise for exact weekly prescriptions (MAE ~7 miles, R² ~0.41).
+- **LLM Output**: Prompt engineering is critical for structured, actionable plans.
+- **User Experience**: Offering both quick and advanced modes increases accessibility and personalization.
+
+---
+
+### Visualizations & Features
+
+- **Weekly Plan Table**: Day-by-day schedule with mileage, time, and pace.
+- **Coach’s Advice**: Motivational, context-aware explanations.
+- **Modern UI**: Earth-tone theme, card-based layout, and clear separation of summary, schedule, and advice.
+
+---
+
+### Technical Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| **LLM Table Output** | Ensures clarity and easy parsing for the UI |
+| **LSTM for Advanced Users** | Personalizes mileage progression based on real history |
+| **Cluster-based Recommender** | Matches users to archetypes for safe, effective plans |
+| **Quick/Advanced Modes** | Balances ease-of-use and personalization |
+| **Markdown Table Parsing** | Guarantees a single, clean schedule display |
+
+---
+
+### Project Structure Update
+
+```
+running-plan-builder/
+├── app.py                         # Streamlit web app
+├── llm_handler.py                 # LLM prompt & response handler
+├── recommender.py                 # Rule-based recommendation logic
+├── mileage_predictor.py           # LSTM mileage prediction
+├── models/
+│   └── lstm_model_best.keras      # Trained LSTM model
+├── data/
+│   ├── athlete_profiles_clustered_k3.csv
+│   ├── cluster_summary_k3.csv
+│   └── cluster_profiles.json
+├── notebooks/
+│   ├── clustering.ipynb
+│   ├── lstm_model.ipynb
+│   └── ...
+├── visualizations/
+│   └── clustering_comparison_kmeans_vs_dbscan.png
+└── README.md
+```
+
+---
